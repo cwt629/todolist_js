@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'Dongle-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108_2@1.0/Dongle-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+*{
+    font-family: 'Dongle-Regular';
+    box-sizing: border-box;
+}
+
+/* font-size가 em인 부분을 위한 html 태그의 폰트 설정 */
+html{
+    font-size: 18px;
+}
+
+/* 구현하는 리스트가 화면 상에서 가운데에 나타날 수 있도록 함 */
+#container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 타이틀 부분 */
+h1{
+    font-size: 2em;
+    text-align: center;
+    margin: 10px 5px;
+    border-bottom: 0.5px solid rgb(234, 234, 234);
+}
+
+/* 리스트 전체 부분 */
+#overall{
+    position: relative;
+    width: 320px;
+    height: 568px;
+    border-radius: 16px;
+    background-color: rgb(171, 193, 209);
+}
+
+/* 입력창 및 버튼 */
+input{
+    font-size: 1.4em;
+    margin: 0;
+    border: none;
+    height: 45px;
+}
+
+/* 리스트 */
+#todo_list{
+    max-height: 420px;
+    overflow: auto;
+}
+
+/* 리스트의 각 요소(말풍선) */
+ul > li{
+    /* 여기서 주의!
+    여기서 #todo_list > li 를 썼었는데,
+    이후에 done으로 바꿔도 background-color가 바뀌지 않는 것을 확인했다.
+    이는 아이디 선택자가 클래스 선택자보다 우선되는 현상 때문인 것으로 보인다.
+    그래서, 이를 ul > li 로 바꿔주기로 했다. 
+    */
+    cursor: pointer;
+    position: relative;
+    left: 60px;
+    /* list-style-type은 목록의 요소를 나타내는 '점'같은 것인데,
+    여기서는 점은 필요가 없다. */
+    list-style-type: none;
+    width: 200px;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 6px;
+    background-color:rgb(254, 229, 77);
+    border-radius: 8px;
+}
+
+/* 리스트 말풍선 끝에 붙은 삼각형 부분 */
+ul > li::after{
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    width: 0px;
+    height: 0px;
+    /* 삼각형 만들기 위해 border를 이용하는데... 
+    감은 알겠다.
+    0x0 크기의 사각형을 덮는 border는 어쨌든
+    직각삼각형 4개의 형태인데, (CSS 기초 필기파일의 7페이지를 보자)
+    border는 일단 기본적으로 여기서는 0px이기 때문에
+    좌-우, 상-하 둘중 한 쌍이라도 모두 0px이라면
+    가로나 세로가 0px이 되어버려서 아예 화면에서 보이지 않는다.
+    bottom과 left처럼 하나씩이라도 0px이 아니라면,
+    그 애들이 그려지되, 0px인 부분은 플라스틱 찌그러트리듯이
+    점점 찌그러트리면 새로운 삼각형 모양으로 확인할 수 있다.
+    무슨 말인지는...bottom left right 등등으로 실험해보면서 다시 익혀보자. */
+    border-bottom: 16px solid transparent;
+    border-left: 16px solid rgb(254, 229, 77);
+}
+
+/* 리스트의 x 버튼 */
+ul > li > span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px; 
+    height: 16px;
+    border-radius: 8px;
+    background-color: rgb(234, 234, 234);
+    position: absolute;
+    left: -20px;
+    bottom: 2px;
+}
+
+/* 입력창과 버튼 전체 */
+form{
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 입력창 */
+#input_todo{
+   width: 240px;
+   padding-left: 10px;
+}
+
+/* 입력창에 입력중일 때(테두리가 뜨지 않도록) */
+#input_todo:focus{
+    outline: none;
+}
+
+/* '추가' 버튼 */
+#add{
+    cursor: pointer;
+    width: 80px;
+    border-radius: 8px;
+    background-color: rgb(254, 229, 77);
+}
+
+/* class가 done이 된 말풍선 */
+.done{
+    color: rgb(93, 93, 93);
+    background-color: rgb(234, 234, 234);
+}
+
+/* class가 done이 된 말풍선 뒤에 붙은 삼각형 */
+.done::after{
+    border-left: 16px solid rgb(234, 234, 234);
+}
